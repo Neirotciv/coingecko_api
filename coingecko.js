@@ -1,15 +1,15 @@
 const pingUrl = 'https://api.coingecko.com/api/v3/ping';
 
-const ping = async function () {
+const connectButton = document.getElementById('connect-button');
+
+connectButton.addEventListener('click', async function () {
     await fetch(pingUrl)
         .then(function (response) {
-            console.log(response.status);
-
+            let status = document.getElementById('status');
+            status.innerText = 'Status : ' + response.status;
             return response.json();
         }).then(function (data) {
-            console.log(data["gecko_says"]);
+            let ping = document.getElementById('gecko-says');
+            ping.innerText = data['gecko_says'];
         });
-};
-
-ping();
-
+});
