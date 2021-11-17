@@ -14,5 +14,6 @@
 **.catch()**: methode de promesse pour gérer le cas ou la promesse renvoyé est ***reject***, la fonction sera executée.
 
 ## Support
+* [Coingecko](https://www.coingecko.com/en/api/documentation)
 * [MDN](https://developer.mozilla.org/fr/docs/Web/API/Fetch_API/Using_Fetch)
 * [Exemple d'utilisation](https://www.digitalocean.com/community/tutorials/how-to-use-the-javascript-fetch-api-to-get-data-fr)
