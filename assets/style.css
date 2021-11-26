@@ -1,7 +1,6 @@
-body {
-    background-color: rgb(18, 18, 51);
-}
+body { background-color: rgb(18, 18, 51); }
 
-.container {
-    margin-top: 20px;
-}
+.container { margin-top: 20px; }
+
+#proposal-list { background-color: #ffffff; width: 200px; }
+.proposal:hover { background-color: #19a136; }
