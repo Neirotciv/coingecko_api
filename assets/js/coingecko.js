@@ -2,7 +2,7 @@ const pingUrl = 'https://api.coingecko.com/api/v3/ping';
 const coinListUrl = 'https://api.coingecko.com/api/v3/coins/list';
 const coinMarketByIdUrl = 'https://api.coingecko.com/api/v3/coins/markets/';
 
-let coinList = [];
+let coinList = ["bitcoin", "ethereum", "solana", "avalanche"];
 
 const connectButton = document.getElementById('connect-button');
 connectButton.addEventListener('click', async function () {
@@ -42,7 +42,6 @@ searchButton.addEventListener('click', async function() {
     let ids = '&ids=' + coinId;
     await fetch(coinMarketByIdUrl + vsCurrency + ids)
         .then(function (response) {
-            console.log(response.status);
             return response.json();
         })
         .then(function (data) {
@@ -75,24 +74,33 @@ searchCoinId.addEventListener('keyup' , function() {
     // Détruire la div des propositions si elle existe
     if (document.getElementById('proposal-list')) {
         let proposalDiv = document.getElementById('proposal-list');
-        document.querySelector('body').removeChild(proposalDiv);
+        document.getElementById('search-form').removeChild(proposalDiv);
     }
 
     if (filterCoin.length != 0) {
-        // construire la liste des propositions
-        console.log(filterCoin.length);
+        // Construire la liste des propositions
         let proposalDiv = document.createElement('div');
         proposalDiv.id = 'proposal-list';
+
+        // Positionnement de la div par rapport à l'input
+        let inputRect = document.getElementById('coin-id').getBoundingClientRect();
+        proposalDiv.style.top = `${inputRect.height}px`;
+        proposalDiv.style.width = `${inputRect.width}px`;
+        
         for (let i = 0; i < filterCoin.length; i++) {
             let proposal = document.createElement('div');
             proposal.classList.add('proposal');
             proposal.innerText = filterCoin[i];
+            proposal.style.height = `${inputRect.height}px`;
+
+            // Valider le choix en cliquant
             proposal.addEventListener('click', function() {
                 searchCoinId.value = this.innerText;
-                document.querySelector('body').removeChild(proposalDiv);
+                document.getElementById('search-form').removeChild(proposalDiv);
             });
+
             proposalDiv.appendChild(proposal);
         }
-        document.querySelector('body').appendChild(proposalDiv);
+        document.getElementById('search-form').appendChild(proposalDiv);
     }
 });
